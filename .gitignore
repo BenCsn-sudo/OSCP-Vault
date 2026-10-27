@@ -1,0 +1,26 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor & Temporary Files
+*~
+*.swp
+*.swo
+*.tmp
+*.bak
+.idea/
+.vscode/
+
+# Obsidian Live Workspace State (keep plugins and appearance, ignore transient tab state)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+*/.obsidian/workspace.json
+*/.obsidian/workspace-mobile.json
+*/.obsidian/cache/
