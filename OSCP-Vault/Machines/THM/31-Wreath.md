@@ -44,7 +44,7 @@ nmap -sV -p 22,80,443,9090,10000 10.200.180.200
 
 Navigating to `http://10.200.180.200` triggers an automatic redirect to `https://thomaswreath.thm`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260720200158.png)
+![Screenshot](../../attachments/Pasted image 20260720200158.png)
 
 The hostname was mapped locally in `/etc/hosts`:
 
@@ -54,7 +54,7 @@ The hostname was mapped locally in `/etc/hosts`:
 
 Inspecting port 10000 identified **MiniServ 1.890**, the underlying web server for Webmin:
 
-![Screenshot](../../attachments/Pasted%20image%2020260720202819.png)
+![Screenshot](../../attachments/Pasted image 20260720202819.png)
 
 Searching public vulnerability databases for MiniServ 1.890 identified **CVE-2019-15107**, an unauthenticated remote code execution vulnerability residing in the `password_change.cgi` script when the password change feature is enabled.
 
@@ -192,11 +192,11 @@ sshuttle -r root@10.200.180.200 --ssh-cmd "ssh -i key" 10.200.180.150
 
 With the route established, navigating to `http://10.200.180.150` in the browser became possible:
 
-![Screenshot](../../attachments/Pasted%20image%2020260721225423.png)
+![Screenshot](../../attachments/Pasted image 20260721225423.png)
 
 Following the application redirect paths brought up the GitStack application interface:
 
-![Screenshot](../../attachments/Pasted%20image%2020260721225500.png)
+![Screenshot](../../attachments/Pasted image 20260721225500.png)
 
 ### Exploiting GitStack 2.3.10 (CVE-2018-5955)
 

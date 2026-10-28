@@ -66,7 +66,7 @@ Navigating to `http://10.130.182.142/retro/` displays a personal blog based on r
 
 Reviewing the blog posts and user comments on the site revealed a public comment left by author Wade detailing his password:
 
-![Screenshot](../../attachments/Pasted%20image%2020260709191452.png)
+![Screenshot](../../attachments/Pasted image 20260709191452.png)
 
 > "Leaving myself a note so I don't forget my password again: parzival"
 

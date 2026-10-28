@@ -69,7 +69,7 @@ Anonymous FTP access is disabled.
 #### HTTP and HTTPS (Ports 80 and 443)
 Browsing to `http://192.168.186.55/` displays the default XAMPP landing page:
 
-![Screenshot](../../attachments/Pasted%20image%2020260830113202.png)
+![Screenshot](../../attachments/Pasted image 20260830113202.png)
 
 A directory fuzzing scan with Gobuster returned standard XAMPP paths, most of which returned `403 Forbidden`:
 
@@ -186,11 +186,11 @@ curl -s -I -X OPTIONS http://192.168.186.55/ | grep -i "dav\|allow"
 #### Locating the WordPress Installation
 Standard directory fuzzing on the root domain did not directly reveal the WordPress instance. However, reviewing `phpinfo.php` and the NetBIOS hostname revealed the target name `shenzi`. Navigating to `/shenzi/` exposed the WordPress application:
 
-![Screenshot](../../attachments/Pasted%20image%2020260830114209.png)
+![Screenshot](../../attachments/Pasted image 20260830114209.png)
 
 Accessing the administration login at `http://192.168.186.55/shenzi/wp-admin`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260830114615.png)
+![Screenshot](../../attachments/Pasted image 20260830114615.png)
 
 Authenticating with `admin` : `FeltHeadwallWight357` granted administrator access to the WordPress dashboard.
 

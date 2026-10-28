@@ -24,3 +24,6 @@ desktop.ini
 */.obsidian/workspace.json
 */.obsidian/workspace-mobile.json
 */.obsidian/cache/
+
+# Root-level .obsidian directory (not a valid Obsidian vault - open OSCP-Vault/ or OSCP-Starter-Kit/ instead)
+.obsidian/

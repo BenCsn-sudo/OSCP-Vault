@@ -199,12 +199,12 @@ Because RDP (port 3389) is active, we can leverage this privilege to replace the
    xfreerdp /v:$IP
    ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260826194215.png)
+![Screenshot](../../attachments/Pasted image 20260826194215.png)
 
 2. On the Windows logon screen, press **Windows Key + U** or click the Ease of Access icon in the bottom right corner.
 3. An administrative command prompt spawns on the screen running as `NT AUTHORITY\SYSTEM`!
 
-![Screenshot](../../attachments/Pasted%20image%2020260826194238.png)
+![Screenshot](../../attachments/Pasted image 20260826194238.png)
 
 ```cmd
 C:\Windows\system32> whoami
@@ -214,7 +214,7 @@ C:\Windows\system32> type C:\Users\Administrator\Desktop\proof.txt
 [FLAG REDACTED]
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260826194400.png)
+![Screenshot](../../attachments/Pasted image 20260826194400.png)
 
 ---
 

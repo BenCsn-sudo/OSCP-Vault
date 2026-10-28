@@ -23,7 +23,7 @@ We initiate reconnaissance with a full TCP port scan:
 sudo nmap -sC -sV -p- -T4 -oA nmap/full_tcp $IP
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260531233344.png)
+![Screenshot](../../attachments/Pasted image 20260531233344.png)
 
 **Open Ports Summary:**
 
@@ -39,8 +39,8 @@ sudo nmap -sC -sV -p- -T4 -oA nmap/full_tcp $IP
 
 Browsing to `http://$IP/` displays a default landing page. Standard checks for `robots.txt` and `sitemap.xml` yielded no sensitive endpoints:
 
-![Screenshot](../../attachments/Pasted%20image%2020260531233828.png)
-![Screenshot](../../attachments/Pasted%20image%2020260531233942.png)
+![Screenshot](../../attachments/Pasted image 20260531233828.png)
+![Screenshot](../../attachments/Pasted image 20260531233942.png)
 
 Running directory fuzzing with `gobuster`:
 
@@ -48,16 +48,16 @@ Running directory fuzzing with `gobuster`:
 gobuster dir -u http://$IP/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260531234236.png)
+![Screenshot](../../attachments/Pasted image 20260531234236.png)
 
 The scan discovers an administrative login page located at `/admin`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260531234325.png)
+![Screenshot](../../attachments/Pasted image 20260531234325.png)
 
 > Note on initial attempts: Authentication bypass via basic SQL injection payloads (`' OR 1=1 --`) on `/admin` failed because authentication is handled in PHP code rather than a database query.
 
-![Screenshot](../../attachments/Pasted%20image%2020260531234612.png)
-![Screenshot](../../attachments/Pasted%20image%2020260601000445.png)
+![Screenshot](../../attachments/Pasted image 20260531234612.png)
+![Screenshot](../../attachments/Pasted image 20260601000445.png)
 
 ---
 
@@ -72,15 +72,15 @@ ftp $IP 2112
 # 230 Anonymous access granted, restrictions apply.
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260601135933.png)
-![Screenshot](../../attachments/Pasted%20image%2020260601140017.png)
+![Screenshot](../../attachments/Pasted image 20260601135933.png)
+![Screenshot](../../attachments/Pasted image 20260601140017.png)
 
 Listing directory contents reveals two files:
 - `welcome.msg`: Banner message.
 - `index.php.bak`: Leaked backup file containing the PHP source code of the admin login page.
 
-![Screenshot](../../attachments/Pasted%20image%2020260601163926.png)
-![Screenshot](../../attachments/Pasted%20image%2020260601164037.png)
+![Screenshot](../../attachments/Pasted image 20260601163926.png)
+![Screenshot](../../attachments/Pasted image 20260601164037.png)
 
 #### Source Code Analysis (index.php.bak)
 
@@ -116,8 +116,8 @@ Content-Type: application/x-www-form-urlencoded
 username=admin&password[]=
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260601170331.png)
-![Screenshot](../../attachments/Pasted%20image%2020260601170409.png)
+![Screenshot](../../attachments/Pasted image 20260601170331.png)
+![Screenshot](../../attachments/Pasted image 20260601170409.png)
 
 The server accepts the request and redirects to the authenticated dashboard.
 
@@ -127,15 +127,15 @@ The server accepts the request and redirects to the authenticated dashboard.
 
 Inside the admin dashboard, a log viewer functionality allows administrators to view system log files:
 
-![Screenshot](../../attachments/Pasted%20image%2020260607161903.png)
+![Screenshot](../../attachments/Pasted image 20260607161903.png)
 
 Inspecting the HTTP traffic in Burp Suite reveals that the file path is transmitted via a parameter in the POST body:
 
-![Screenshot](../../attachments/Pasted%20image%2020260607162009.png)
+![Screenshot](../../attachments/Pasted image 20260607162009.png)
 
 Testing directory traversal by setting the parameter to `../../../../../../etc/passwd`:
 
-![Screenshot](../../attachments/Pasted%20image%2020260607162058.png)
+![Screenshot](../../attachments/Pasted image 20260607162058.png)
 
 The file `/etc/passwd` is successfully returned.
 

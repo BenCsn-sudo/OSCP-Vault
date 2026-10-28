@@ -44,7 +44,7 @@ PORT   STATE SERVICE VERSION
 
 The web server runs Apache httpd 2.4.48 on 64-bit Windows with PHP 8.0.7.
 
-![Screenshot](../../attachments/Pasted%20image%2020260927115014.png)
+![Screenshot](../../attachments/Pasted image 20260927115014.png)
 
 ### 1.2 Web Application Enumeration
 
@@ -65,11 +65,11 @@ uploads              (Status: 301) [Size: 344] [--> http://192.168.187.169/uploa
 
 Browsing the web application revealed an HR resume submission form:
 
-![Screenshot](../../attachments/Pasted%20image%2020260927120239.png)
+![Screenshot](../../attachments/Pasted image 20260927120239.png)
 
 Attempting to upload a standard PHP reverse shell was blocked by the application's client/server-side validation:
 
-![Screenshot](../../attachments/Pasted%20image%2020260927120611.png)
+![Screenshot](../../attachments/Pasted image 20260927120611.png)
 
 The upload mechanism strictly enforces the OpenDocument Text (`.odt`) file extension.
 
@@ -85,11 +85,11 @@ The server processes submitted resumes, suggesting automated backend conversion 
 1. Open LibreOffice Writer and create an empty document.
 2. Open the macro editor: **Tools > Macros > Organize Macros > Basic**.
 
-![Screenshot](../../attachments/Pasted%20image%2020260927122619.png)
+![Screenshot](../../attachments/Pasted image 20260927122619.png)
 
 3. Create a new macro under the document and define the execution payload:
 
-![Screenshot](../../attachments/Pasted%20image%2020260927125308.png)
+![Screenshot](../../attachments/Pasted image 20260927125308.png)
 
 ```macro
 Sub Main
@@ -100,7 +100,7 @@ End Sub
 
 4. Bind the macro to the document open event: **Tools > Customize > Events > Open Document**.
 
-![Screenshot](../../attachments/Pasted%20image%2020260927132118.png)
+![Screenshot](../../attachments/Pasted image 20260927132118.png)
 
 #### Automated Payload Generation (`mmg-odt.py`)
 Alternatively, an automated malicious ODT generator can be used:
@@ -119,7 +119,7 @@ Done.
 
 Upload the crafted `.odt` document via the web portal:
 
-![Screenshot](../../attachments/Pasted%20image%2020260927134650.png)
+![Screenshot](../../attachments/Pasted image 20260927134650.png)
 
 With a Netcat listener active on port 443, the backend process opens the uploaded resume, triggers the macro, and connects back:
 
@@ -288,7 +288,7 @@ type C:\Users\apache\output.txt
 [FLAG REDACTED]
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260927151017.png)
+![Screenshot](../../attachments/Pasted image 20260927151017.png)
 
 ---
 

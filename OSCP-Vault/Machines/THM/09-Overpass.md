@@ -43,8 +43,8 @@ Directory fuzzing with Gobuster revealed an administration endpoint:
 gobuster dir -u http://10.128.128.181/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
-![Screenshot](../../attachments/Pasted%20image%2020260608173804.png)
-![Screenshot](../../attachments/Pasted%20image%2020260608174009.png)
+![Screenshot](../../attachments/Pasted image 20260608173804.png)
+![Screenshot](../../attachments/Pasted image 20260608174009.png)
 
 Accessing `http://10.128.128.181/admin` displays a login form.
 
@@ -77,8 +77,8 @@ Inspecting the client-side JavaScript file `login.js` associated with the login 
    - **Value:** `authenticated`
 4. Refresh `http://10.128.128.181/admin`.
 
-![Screenshot](../../attachments/Pasted%20image%2020260608211333.png)
-![Screenshot](../../attachments/Screenshot%20From%202026-06-08%2021-16-44.png)
+![Screenshot](../../attachments/Pasted image 20260608211333.png)
+![Screenshot](../../attachments/Screenshot From 2026-06-08 21-16-44.png)
 
 The authentication check is bypassed, granting access to the administration dashboard.
 
