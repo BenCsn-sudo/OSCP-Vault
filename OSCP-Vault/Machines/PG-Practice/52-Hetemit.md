@@ -42,17 +42,17 @@ The scan discovers several open ports, including standard services (FTP, SSH, HT
 #### Port 80 (Apache Default Page)
 Navigating to `http://192.168.139.117:80/` displays a default Apache HTTP Server landing page without custom application code:
 
-![Screenshot](../../attachments/Pasted image 20261010193937.png)
+![[Pasted image 20261010193937.png]]
 
 #### Port 18000 (Authentication Portal)
 Accessing `http://192.168.139.117:18000/` presents an authentication login screen without default credentials:
 
-![Screenshot](../../attachments/Screenshot From 2026-10-10 19-39-55.png)
+![[Screenshot From 2026-10-10 19-39-55.png]]
 
 #### Port 50000 (Custom REST API)
 Navigating to `http://192.168.139.117:50000/` returns a JSON object exposing available endpoints:
 
-![Screenshot](../../attachments/Pasted image 20261010194131.png)
+![[Pasted image 20261010194131.png]]
 
 ```json
 {'/generate', '/verify'}
@@ -61,11 +61,11 @@ Navigating to `http://192.168.139.117:50000/` returns a JSON object exposing ava
 Inspecting each endpoint individually:
 - `http://192.168.139.117:50000/generate` displays `{'email@domain'}`:
 
-![Screenshot](../../attachments/Pasted image 20261010194317.png)
+![[Pasted image 20261010194317.png]]
 
 - `http://192.168.139.117:50000/verify` displays `{'code'}`:
 
-![Screenshot](../../attachments/Pasted image 20261010194406.png)
+![[Pasted image 20261010194406.png]]
 
 ---
 
@@ -164,7 +164,7 @@ The user can reboot the system as `root` without providing a password.
 
 Running LinPEAS identifies insecure file permissions on a custom systemd service unit:
 
-![Screenshot](../../attachments/Pasted image 20261010203317.png)
+![[Pasted image 20261010203317.png]]
 
 Checking permissions and inspecting `/etc/systemd/system/pythonapp.service`:
 

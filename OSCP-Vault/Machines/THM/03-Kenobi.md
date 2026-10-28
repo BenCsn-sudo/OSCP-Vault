@@ -24,8 +24,8 @@ A full TCP port scan was performed using Nmap:
 nmap -sC -sV -p- -T4 -oA nmap/full_tcp_10.130.128.80 10.130.128.80
 ```
 
-![Screenshot](../../attachments/Pasted image 20260528194315.png)
-![Screenshot](../../attachments/Screenshot From 2026-05-28 19-47-43.png)
+![[Pasted image 20260528194315.png]]
+![[Screenshot From 2026-05-28 19-47-43.png]]
 
 **Open Ports:**
 - **Port 21:** ProFTPd 1.3.5
@@ -40,13 +40,13 @@ nmap -sC -sV -p- -T4 -oA nmap/full_tcp_10.130.128.80 10.130.128.80
 #### FTP (Port 21)
 Anonymous login was tested against ProFTPd 1.3.5 and required password authentication:
 
-![Screenshot](../../attachments/Screenshot From 2026-05-28 19-52-34.png)
+![[Screenshot From 2026-05-28 19-52-34.png]]
 
 #### HTTP (Port 80)
 Inspecting `robots.txt` exposed `/admin.html`:
 
-![Screenshot](../../attachments/Pasted image 20260528195635.png)
-![Screenshot](../../attachments/Screenshot From 2026-05-28 19-58-18.png)
+![[Pasted image 20260528195635.png]]
+![[Screenshot From 2026-05-28 19-58-18.png]]
 
 The page was a static trap without operational functionality or input vectors.
 
@@ -57,7 +57,7 @@ Checking RPC services with `rpcinfo`:
 rpcinfo -p 10.130.165.69
 ```
 
-![Screenshot](../../attachments/Pasted image 20260529173908.png)
+![[Pasted image 20260529173908.png]]
 
 The NFS daemon was running, indicating that exportable network file systems could be available.
 
@@ -69,11 +69,11 @@ Enumerating the host using `enum4linux`:
 enum4linux -a 10.130.165.69
 ```
 
-![Screenshot](../../attachments/Screenshot From 2026-05-29 18-06-49.png)
-![Screenshot](../../attachments/Screenshot From 2026-05-29 18-07-22.png)
-![Screenshot](../../attachments/Screenshot From 2026-05-29 18-09-53.png)
-![Screenshot](../../attachments/Screenshot From 2026-05-29 18-12-18.png)
-![Screenshot](../../attachments/Screenshot From 2026-05-29 18-12-46.png)
+![[Screenshot From 2026-05-29 18-06-49.png]]
+![[Screenshot From 2026-05-29 18-07-22.png]]
+![[Screenshot From 2026-05-29 18-09-53.png]]
+![[Screenshot From 2026-05-29 18-12-18.png]]
+![[Screenshot From 2026-05-29 18-12-46.png]]
 
 **Findings:**
 - Target hostname: `KENOBI`
@@ -91,7 +91,7 @@ Connecting to the anonymous share using `smbclient`:
 smbclient //10.129.182.213/anonymous -N
 ```
 
-![Screenshot](../../attachments/Pasted image 20260530113806.png)
+![[Pasted image 20260530113806.png]]
 
 Listing and downloading all available files revealed `log.txt`. Reviewing the log provided vital architectural details:
 1. An SSH key pair had been generated for user `kenobi` at `/home/kenobi/.ssh/id_rsa`.
@@ -110,7 +110,7 @@ Checking for known exploits targeting ProFTPd 1.3.5:
 searchsploit proftpd 1.3.5
 ```
 
-![Screenshot](../../attachments/Pasted image 20260530124439.png)
+![[Pasted image 20260530124439.png]]
 
 > [!NOTE] Concept: CVE-2015-3306 (ProFTPd mod_copy)
 > The `mod_copy` module in ProFTPd 1.3.5 permits unauthenticated clients to execute `SITE CPFR` (copy from) and `SITE CPTO` (copy to) commands. Any unauthenticated user can instruct the FTP server to copy arbitrary files from anywhere on the system into a directory readable or accessible to the attacker.
@@ -158,7 +158,7 @@ chmod 600 id_rsa
 sudo umount /tmp/kenobi_nfs
 ```
 
-![Screenshot](../../attachments/Pasted image 20260530125805.png)
+![[Pasted image 20260530125805.png]]
 
 #### Step 3: Authenticate via SSH
 Connect as `kenobi` using the extracted private key:
@@ -167,7 +167,7 @@ Connect as `kenobi` using the extracted private key:
 ssh -i id_rsa kenobi@10.130.169.82
 ```
 
-![Screenshot](../../attachments/Pasted image 20260530130106.png)
+![[Pasted image 20260530130106.png]]
 
 A low-privilege interactive session is established as `kenobi`.
 
@@ -243,7 +243,7 @@ Run `/usr/bin/menu` and select Option 1:
 
 The application invokes the local `/tmp/curl` payload and spawns a root shell:
 
-![Screenshot](../../attachments/Pasted image 20260530132745.png)
+![[Pasted image 20260530132745.png]]
 
 ```bash
 id

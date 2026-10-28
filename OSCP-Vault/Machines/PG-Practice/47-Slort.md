@@ -43,7 +43,7 @@ PORT      STATE SERVICE
 
 Browsing to `http://$IP:8080/` displays a default XAMPP landing page:
 
-![Screenshot](../../attachments/Pasted image 20260828094249.png)
+![[Pasted image 20260828094249.png]]
 
 Running directory fuzzing with `gobuster`:
 
@@ -59,7 +59,7 @@ gobuster dir -u http://$IP:8080/ -w /usr/share/wordlists/dirb/common.txt
 
 Navigating to `/site/` reveals an interactive web application:
 
-![Screenshot](../../attachments/Screenshot From 2026-08-28 09-56-12.png)
+![[Screenshot From 2026-08-28 09-56-12.png]]
 
 The URL structure uses a query parameter to load sub-pages:
 ```text
@@ -78,7 +78,7 @@ We test the `page` parameter for directory traversal against standard Windows sy
 http://192.168.x.x:8080/site/index.php?page=../../../../../../../../windows/System32/drivers/etc/hosts
 ```
 
-![Screenshot](../../attachments/Pasted image 20260828095715.png)
+![[Pasted image 20260828095715.png]]
 
 The contents of the Windows `hosts` file are rendered into the page, confirming unauthenticated LFI.
 

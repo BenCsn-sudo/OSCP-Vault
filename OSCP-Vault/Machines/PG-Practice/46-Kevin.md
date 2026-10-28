@@ -46,18 +46,18 @@ PORT      STATE SERVICE
 
 Browsing to `http://$IP/` opens the login portal for **HP Power Manager**:
 
-![Screenshot](../../attachments/Pasted image 20260828084040.png)
+![[Pasted image 20260828084040.png]]
 
 Testing default administrative credentials (`admin` / `admin`):
 
-![Screenshot](../../attachments/Pasted image 20260828084127.png)
+![[Pasted image 20260828084127.png]]
 
 Authentication succeeds immediately.
 
 #### Application Version Detection
 Navigating through the administrative settings reveals the exact software version:
 
-![Screenshot](../../attachments/Pasted image 20260828084357.png)
+![[Pasted image 20260828084357.png]]
 
 The application is identified as **HP Power Manager 4.2 (Build 7)**.
 
@@ -69,7 +69,7 @@ The application is identified as **HP Power Manager 4.2 (Build 7)**.
 
 Searching Exploit-DB for HP Power Manager vulnerabilities:
 
-![Screenshot](../../attachments/Pasted image 20260828084724.png)
+![[Pasted image 20260828084724.png]]
 
 HP Power Manager versions prior to 4.2.10 contain a stack-based buffer overflow in the administrative log export endpoint (`formExportDataLogs`), tracked under **CVE-2009-3999** (EDB-ID 10099). The application fails to validate the length of user-supplied strings before copying them into a fixed-size stack buffer, enabling reliable remote code execution.
 

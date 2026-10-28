@@ -24,8 +24,8 @@ A full TCP port scan was performed using Nmap:
 sudo nmap -sC -sV -p- -T4 -oA nmap/full_tcp_10.128.164.164 10.128.164.164
 ```
 
-![Screenshot](../../attachments/Pasted image 20260527204442.png)
-![Screenshot](../../attachments/Pasted image 20260527204512.png)
+![[Pasted image 20260527204442.png]]
+![[Pasted image 20260527204512.png]]
 
 **Identified Ports:**
 - **Port 135:** Microsoft RPC
@@ -76,7 +76,7 @@ In OSCP preparation, avoiding Metasploit and mastering standalone Python exploit
 
 Initial attempts using legacy Python 2 scripts failed due to deprecated libraries (`impacket` Python 2 dependencies on modern Kali Linux installations):
 
-![Screenshot](../../attachments/Pasted image 20260527224230.png)
+![[Pasted image 20260527224230.png]]
 
 #### Exploitation via AutoBlue-MS17-010 (Python 3)
 

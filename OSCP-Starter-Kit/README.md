@@ -86,9 +86,9 @@ Follow this procedure for every lab machine you compromise during your preparati
 - Log your initial Nmap scans in **Section 1 (Reconnaissance and Enumeration)**.
 - Document the exploitation path and initial user compromise in **Section 2 (Initial Access)**.
 - Record internal enumeration and root/SYSTEM elevation in **Section 3 (Privilege Escalation)**.
-- Save screenshots directly into `attachments/` and embed them using standard Markdown:
+- Save screenshots directly into `attachments/` and embed them using Obsidian syntax:
   ```markdown
-  ![Proof Screenshot](attachments/target-proof.png)
+  ![[target-proof.png]]
   ```
 
 ### Step 3: Extract One-Liners and Key Takeaways

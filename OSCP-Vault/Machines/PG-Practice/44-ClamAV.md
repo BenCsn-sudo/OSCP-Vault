@@ -63,7 +63,7 @@ The service is identified as **Sendmail 8.13.4** running on an older Debian rele
 
 Sendmail instances configured to filter attachments using early versions of the ClamAV milter plugin (`clamav-milter`) are vulnerable to arbitrary command injection tracked under **CVE-2007-4560**.
 
-![Screenshot](../../attachments/Pasted image 20260827082843.png)
+![[Pasted image 20260827082843.png]]
 
 **Vulnerability Mechanics:**
 When receiving incoming mail, `clamav-milter` fails to sanitize email addresses supplied in the `RCPT TO` header before executing shell calls to log or process warnings. By appending unescaped shell commands inside backticks or pipe operators, arbitrary commands execute with the privileges of the milter process (which runs as **root**).

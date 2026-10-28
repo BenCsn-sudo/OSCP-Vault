@@ -39,7 +39,7 @@ Port 1898 fingerprints as Drupal 7 via the `http-generator` meta-tag identified 
 
 Navigating to `http://$IP:1898/` presents a blog site centered around Brazilian culture and folklore:
 
-![Screenshot](../../attachments/Pasted image 20260606171523.png)
+![[Pasted image 20260606171523.png]]
 
 #### Key Discoveries:
 1. **Active Users / Authors:** The blog posts are authored by two usernames:

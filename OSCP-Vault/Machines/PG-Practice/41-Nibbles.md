@@ -34,7 +34,7 @@ PORT     STATE  SERVICE
 5437/tcp open   pmip6-data
 ```
 
-![Screenshot](../../attachments/Pasted image 20260826204906.png)
+![[Pasted image 20260826204906.png]]
 
 A web server is active on port 80, while port 5437 hosts an unfamiliar service labeled `pmip6-data`.
 
